@@ -1,6 +1,9 @@
 # Build Stage
 FROM node:18 AS build
 
+ARG VITE_GITHUB_TOKEN
+ENV VITE_GITHUB_TOKEN=${VITE_GITHUB_TOKEN}
+
 WORKDIR /app
 
 COPY package*.json ./
