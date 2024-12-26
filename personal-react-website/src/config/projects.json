@@ -10,5 +10,11 @@
         "Tech Stack": [
             "Java", "Python", "Spring Boot", "FastAPI", "Kubernetes", "Docker", "Github Actions"
         ]
+    },
+    "Personal React Website nzhussup.com": {
+        "URL": "https://github.com/nzhussup/personal-website",
+        "Tech Stack": [
+            "JavaScript", "React", "Bootstrap", "Docker", "Kubernetes", "Github Actions"
+        ]
     }
 }
