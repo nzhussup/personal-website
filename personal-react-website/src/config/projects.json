@@ -16,5 +16,12 @@
         "Tech Stack": [
             "JavaScript", "React", "Bootstrap", "Docker", "Kubernetes", "Github Actions"
         ]
+    },
+
+    "Clustering-Based SVD++ Recommender Algorithm": {
+        "URL": "https://github.com/nzhussup/clustering-based-svdpp",
+        "Tech Stack": [
+            "Python", "Numpy", "Cython", "Scikit-learn", "Machine Learning"
+        ]
     }
 }
