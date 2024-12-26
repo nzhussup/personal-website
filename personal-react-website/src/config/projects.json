@@ -1,0 +1,14 @@
+{
+    "Kanban Board REST API": {
+        "URL": "https://github.com/nzhussup/kanban-board",
+        "Tech Stack": [
+            "Java", "Spring Boot", "Docker", "Kubernetes", "Redis", "JWT", "PostgreSQL", "Prometheus", "Grafana", "Github Actions"
+        ]
+    },
+    "Recommender System Microservice Backend": {
+        "URL": "https://github.com/nzhussup/recommender-backend",
+        "Tech Stack": [
+            "Java", "Python", "Spring Boot", "FastAPI", "Kubernetes", "Docker", "Github Actions"
+        ]
+    }
+}
