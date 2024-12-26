@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: personal-react-website
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: personal-react-website
+  template:
+    metadata:
+      labels:
+        app: personal-react-website
+    spec:
+      containers:
+        - name: personal-react-website
+          image: nzhussup/personal-website:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: VITE_GITHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: kanban-secrets
+                  key: VITE_GITHUB_TOKEN
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: personal-react-website-service
+  namespace: default
+spec:
+  selector:
+    app: personal-react-website
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: ClusterIP
