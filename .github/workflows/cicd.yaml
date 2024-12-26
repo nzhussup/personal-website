@@ -28,6 +28,7 @@ jobs:
           docker buildx build \
             --platform linux/amd64,linux/arm64 \
             -t nzhussup/personal-website:latest \
+            --build-arg VITE_GITHUB_TOKEN=${{ secrets.VITE_GITHUB_TOKEN }} \
             --push .
         working-directory: personal-react-website
 
