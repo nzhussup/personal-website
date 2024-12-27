@@ -4,3 +4,26 @@
   border-radius: .75rem;
 }
 
+/* Default (Light) Theme */
+:root {
+  --bg-color: #fff;
+  --text-color: #000;
+  --link-color: #007bff;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #fff;
+  --link-color: #bb86fc;
+}
+
+/* Apply the theme */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+a {
+  color: var(--link-color);
+}

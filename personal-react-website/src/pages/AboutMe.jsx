@@ -2,10 +2,10 @@ import React from "react";
 import nurikImage from "../assets/nurik.jpeg";
 import skiing from "../assets/nurik-skiing.jpeg";
 import forest from "../assets/forest.jpeg";
-import linkPhoto from "../assets/link.svg";
+import linkPhoto from "../assets/icons/link.svg";
 import { Link } from "react-router-dom";
 
-const AboutMe = () => {
+const AboutMe = ({ isDarkMode }) => {
   return (
     <div className='container my-5'>
       {/* Row 1: Profile Image and About Me */}
@@ -102,7 +102,7 @@ const AboutMe = () => {
       </div>
 
       {/* Row 3: Links*/}
-      <div className='row mt-5'>
+      <div className='row mt-5 g-4'>
         {/* Links list group */}
         <div className='col-md-6'>
           <div className='d-flex justify-content-around position-relative'>
@@ -114,10 +114,12 @@ const AboutMe = () => {
               >
                 <img
                   src={linkPhoto}
-                  alt='twbs'
+                  alt='link logo'
                   width='32'
                   height='32'
-                  className='rounded-circle flex-shrink-0'
+                  className={`rounded-circle flex-shrink-0 ${
+                    isDarkMode ? "bg-light p-1" : ""
+                  }`} // Add bg-light when dark mode is active
                 />
                 <div className='d-flex gap-2 w-100 justify-content-between'>
                   <div>
@@ -136,10 +138,12 @@ const AboutMe = () => {
               >
                 <img
                   src={linkPhoto}
-                  alt='twbs'
+                  alt='link logo'
                   width='32'
                   height='32'
-                  className='rounded-circle flex-shrink-0'
+                  className={`rounded-circle flex-shrink-0 ${
+                    isDarkMode ? "bg-light p-1" : ""
+                  }`} // Add bg-light when dark mode is active
                 />
                 <div className='d-flex gap-2 w-100 justify-content-between'>
                   <div>
@@ -157,10 +161,12 @@ const AboutMe = () => {
               >
                 <img
                   src={linkPhoto}
-                  alt='twbs'
+                  alt='link logo'
                   width='32'
                   height='32'
-                  className='rounded-circle flex-shrink-0'
+                  className={`rounded-circle flex-shrink-0 ${
+                    isDarkMode ? "bg-light p-1" : ""
+                  }`} // Add bg-light when dark mode is active
                 />
                 <div className='d-flex gap-2 w-100 justify-content-between'>
                   <div>

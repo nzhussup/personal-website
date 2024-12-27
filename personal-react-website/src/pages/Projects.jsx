@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import codeIcon from "../assets/code.svg";
 import projectsData from "../config/projects.json";
 
-const Projects = () => {
+const Projects = ({ isDarkMode }) => {
   const [projectDetails, setProjectDetails] = useState([]);
 
   // Function to fetch the repository metadata (including the description)
@@ -65,7 +64,16 @@ const Projects = () => {
         {projectDetails.map((project, index) => (
           <div className='col d-flex align-items-start' key={index}>
             <div className='icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3'>
-              <img src={codeIcon} alt='Code Icon' />
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='16'
+                height='16'
+                fill='currentColor'
+                class='bi bi-code-slash'
+                viewBox='0 0 16 16'
+              >
+                <path d='M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0' />
+              </svg>
             </div>
             <div>
               <h3 className='fs-2 text-body-emphasis'>{project.name}</h3>
@@ -76,7 +84,11 @@ const Projects = () => {
                   project.techStack.map((tech, idx) => (
                     <span
                       key={idx}
-                      className='badge bg-light text-muted rounded-pill'
+                      className={`badge ${
+                        isDarkMode
+                          ? "bg-secondary text-white"
+                          : "bg-light text-black"
+                      } rounded-pill`}
                       style={{ fontSize: "14px" }}
                     >
                       {tech}
@@ -84,15 +96,25 @@ const Projects = () => {
                   ))
                 ) : (
                   <span
-                    className='badge bg-light text-muted rounded-pill'
+                    className={`badge ${
+                      isDarkMode
+                        ? "bg-secondary text-white"
+                        : "bg-light text-muted"
+                    } rounded-pill`}
                     style={{ fontSize: "14px" }}
                   >
                     No tech stack available
                   </span>
                 )}
               </div>
-              <a href={project.url} className='btn btn-dark mt-3'>
-                visit the source code
+
+              <a
+                href={project.url}
+                className={`btn ${
+                  isDarkMode ? "btn-secondary text-white" : "btn-dark"
+                } mt-3`}
+              >
+                view the source code
               </a>
             </div>
           </div>
