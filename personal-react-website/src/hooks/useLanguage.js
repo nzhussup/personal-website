@@ -1,9 +1,18 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ONE_DAY_MS, resetLanguage } from "../utils/themeAndLanguageUtils";
 
 export const useLanguage = () => {
   const { i18n } = useTranslation();
+
+  // App remembers the chosen language only one day. Then it resets to en.
+  const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+
+  const resetLanguage = (i18n, defaultLanguage = "en") => {
+  i18n.changeLanguage(defaultLanguage);
+  localStorage.setItem("language", defaultLanguage);
+  localStorage.setItem("language_timestamp", Date.now().toString());
+};
+
 
   useEffect(() => {
     const langFromUrl = new URLSearchParams(window.location.search).get("lang");

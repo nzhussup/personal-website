@@ -39,7 +39,7 @@ const UpButton = ({ isDarkMode }) => {
         border: `2px solid ${isDarkMode ? "white" : "black"}`, // Optional: Add a border to make it visible
         zIndex: 1050, // Ensure it's on top of other elements
         padding: 0, // Ensure no padding around the icon
-        transition: "opacity 0.5s ease", // Smooth fade-in/fade-out effect
+        transition: "opacity 1.5s ease", // Smooth fade-in/fade-out effect
       }}
     >
       <svg

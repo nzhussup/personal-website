@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import WarningPopup from "./components/WarningPopup";
 import { useTheme } from "./hooks/useTheme";
 import { useLanguage } from "./hooks/useLanguage";
+import { Suspense } from "react";
 
 const App = () => {
   const { t, i18n } = useTranslation();
@@ -54,19 +55,23 @@ const App = () => {
           }
         />
       )}
-      <Routes>
-        <Route path='/' element={<AboutMe isDarkMode={isDarkMode} t={t} />} />
-        <Route
-          path='/curriculum-vitae'
-          element={<CurriculumVitae isDarkMode={isDarkMode} t={t} />}
-        />
-        <Route
-          path='/projects'
-          element={<Projects isDarkMode={isDarkMode} t={t} />}
-        />
-        <Route path='/links' element={<Links t={t} />} />
-        <Route path='*' element={<NotFound t={t} />} />
-      </Routes>
+
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes location={location}>
+          <Route path='/' element={<AboutMe isDarkMode={isDarkMode} t={t} />} />
+          <Route
+            path='/curriculum-vitae'
+            element={<CurriculumVitae isDarkMode={isDarkMode} t={t} />}
+          />
+          <Route
+            path='/projects'
+            element={<Projects isDarkMode={isDarkMode} t={t} />}
+          />
+          <Route path='/links' element={<Links t={t} />} />
+          <Route path='*' element={<NotFound t={t} />} />
+        </Routes>
+      </Suspense>
+
       <Footer t={t} />
     </>
   );

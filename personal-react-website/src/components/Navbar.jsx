@@ -1,18 +1,30 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
-  const navbarCollapseRef = useRef(null);
+  const navigate = useNavigate();
+  const [isCollapsed, setIsCollapsed] = useState(true);
+  const { i18n } = useTranslation();
 
-  // Close the navbar on mobile after a link is clicked
+  // This func sets a delay in naviagting to achieve a smooth transition.
+  // Also this func takes the optional variable with it if other lang was chosen (not default)
+  const handlePageChange = (path) => {
+    const currentLang = i18n.language;
+    const defaultLang = "en";
+
+    const urlWithLang =
+      currentLang && currentLang !== defaultLang
+        ? `${path}?lang=${currentLang}`
+        : path;
+
+    setTimeout(() => {
+      navigate(urlWithLang, { replace: true });
+    }, 130);
+  };
+
   const closeNavbar = () => {
-    const navbarCollapse = navbarCollapseRef.current;
-    if (navbarCollapse) {
-      const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
-        toggle: false,
-      });
-      bsCollapse.hide();
-    }
+    setIsCollapsed(true);
   };
 
   return (
@@ -23,9 +35,10 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
     >
       <div className='container'>
         {/* Brand */}
-        <Link
-          to='/'
+        <a
+          href='#'
           className='navbar-brand d-flex align-items-center gap-2 text-decoration-none'
+          onClick={() => handlePageChange("/")}
         >
           <svg className='bi' width='40' height='32'>
             <use xlinkHref='#bootstrap'></use>
@@ -33,7 +46,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
           <span className={`fs-4 ${isDarkMode ? "text-white" : "text-dark"}`}>
             👨🏽‍💻 nurzhanat zhussup
           </span>
-        </Link>
+        </a>
 
         {/* Toggle Button for Mobile */}
         <button
@@ -42,67 +55,74 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
           data-bs-toggle='collapse'
           data-bs-target='#navbarNav'
           aria-controls='navbarNav'
-          aria-expanded='false'
+          aria-expanded={!isCollapsed ? "true" : "false"}
           aria-label='Toggle navigation'
+          onClick={() => setIsCollapsed(!isCollapsed)}
         >
           <span className='navbar-toggler-icon'></span>
         </button>
 
         {/* Navbar Links */}
         <div
-          className='collapse navbar-collapse'
+          className={`collapse navbar-collapse ${isCollapsed ? "" : "show"}`}
           id='navbarNav'
-          ref={navbarCollapseRef}
         >
           <ul className='navbar-nav ms-auto d-flex align-items-center'>
             <li className='nav-item'>
-              <Link
-                to='/'
+              <button
                 className={`nav-link ${
                   isDarkMode ? "text-white" : "text-black"
                 }`}
-                aria-current='page'
-                onClick={closeNavbar}
+                onClick={() => {
+                  handlePageChange("/");
+                  closeNavbar();
+                }}
               >
                 {t("navbar.about_me")}
-              </Link>
+              </button>
             </li>
             <li className='nav-item'>
-              <Link
-                to='/curriculum-vitae'
+              <button
                 className={`nav-link ${
                   isDarkMode ? "text-white" : "text-black"
                 }`}
-                onClick={closeNavbar}
+                onClick={() => {
+                  handlePageChange("/curriculum-vitae");
+                  closeNavbar();
+                }}
               >
                 {t("navbar.cv")}
-              </Link>
+              </button>
             </li>
             <li className='nav-item'>
-              <Link
-                to='/projects'
+              <button
                 className={`nav-link ${
                   isDarkMode ? "text-white" : "text-black"
                 }`}
-                onClick={closeNavbar}
+                onClick={() => {
+                  handlePageChange("/projects");
+                  closeNavbar();
+                }}
               >
                 {t("navbar.projects")}
-              </Link>
+              </button>
             </li>
             <li className='nav-item'>
-              <Link
-                to='/links'
+              <button
                 className={`nav-link ${
                   isDarkMode ? "text-white" : "text-black"
                 }`}
-                onClick={closeNavbar}
+                onClick={() => {
+                  handlePageChange("/links");
+                  closeNavbar();
+                }}
               >
                 {t("navbar.links")}
-              </Link>
+              </button>
             </li>
 
             {/* Language Dropdown */}
-            <li className='nav-item dropdown ms-3'>
+            <li className='nav-item dropdown ms-2 ms-sm-3'>
               <button
                 className={`btn btn-sm dropdown-toggle ${
                   isDarkMode ? "btn-secondary" : "btn-light"
@@ -117,7 +137,10 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
                 <li>
                   <button
                     className='dropdown-item'
-                    onClick={() => changeLanguage("en")}
+                    onClick={() => {
+                      changeLanguage("en");
+                      closeNavbar();
+                    }}
                   >
                     english 🇬🇧
                   </button>
@@ -125,7 +148,10 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
                 <li>
                   <button
                     className='dropdown-item'
-                    onClick={() => changeLanguage("de")}
+                    onClick={() => {
+                      changeLanguage("de");
+                      closeNavbar();
+                    }}
                   >
                     deutsch 🇩🇪
                   </button>
@@ -133,7 +159,10 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
                 <li>
                   <button
                     className='dropdown-item'
-                    onClick={() => changeLanguage("kz")}
+                    onClick={() => {
+                      changeLanguage("kz");
+                      closeNavbar();
+                    }}
                   >
                     қазақша 🇰🇿
                   </button>
@@ -142,7 +171,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
             </li>
 
             {/* Dark Mode Toggle */}
-            <li className='nav-item ms-3'>
+            <li className='nav-item ms-2 ms-sm-3'>
               <div className='form-check form-switch'>
                 <input
                   className='form-check-input'
