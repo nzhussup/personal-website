@@ -37,11 +37,13 @@
         }
     ],
     "Skills": {
-        "Programming Languages": ["Python", "Java", "C++", "R", "SQL", "HTML", "CSS"],
-        "Programming Skills": ["API Development", "Docker", "CI/CD", "Dev/MLOps", "Linux", "AWS", "GitHub Actions", "Kubernetes", "Microservices", "Git", "Jenkins", "Junit", "Mockito", "Prometheus", "Grafana"],
-        "AI / Data Engineering": ["ML", "DL", "ANN", "RNN", "CNN", "LLMs", "Apache Spark", "Hadoop", "Kafka"],
+        "Programming Languages": ["Python", "Java", "JavaScript", "C++", "R", "SQL"],
+        "Backend Engineering": ["Spring Boot", "Spring Security", "FastAPI", "Java EE", "Hibernate", "Apache Spark", "Apache Kafka"],
+        "Frontend Engineering": ["React", "HTML", "CSS", "Bootstrap"],
+        "Infrastructure": ["Docker", "Kubernetes", "Linux", "AWS"],
         "Databases": ["PostgreSQL", "MySQL", "H2", "Redis", "MongoDB"],
-        "Libraries and Frameworks": ["Spring Boot"],
+        "CI/CD/CM, VC and Testing": ["Github Actions", "Jenkins", "Prometheus", "Grafana", "Git", "Github", "Junit", "Mockito"],
+        "AI/ML": ["Machine Learning", "Deep Learning", "LLMs", "scikit-learn", "Tensorflow", "PyTorch"],
         "Soft Skills": ["Fast Learner", "Teamwork", "Problem Solving", "Communication", "Time Management", "Scrum & Kanban"],
         "Languages": [
             "English - Fluent",

@@ -1,11 +1,11 @@
 import React from "react";
 
-const Footer = () => {
+const Footer = ({ t }) => {
   return (
     <div className='container'>
       <footer>
         <div className='d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top'>
-          <p>© 2024 by nzhussup. All rights reserved.</p>
+          <p>{t("footer.text")}</p>
           <ul className='list-unstyled d-flex'>
             <li className='ms-3'>
               <a

@@ -1,0 +1,80 @@
+{
+  "navbar": {
+    "about_me": "about me",
+    "cv": "curriculum vitae",
+    "projects": "projects",
+    "links": "links",
+    "language": "language"
+  },
+
+  "footer": {
+      "text": "© 2024 by nzhussup. all rights reserved."
+  },
+
+  "about_me_page": {
+    "about_me": {
+      "title": "About Me",
+      "yep_thats_me": "<- Yep that's me :)",
+      "text1": "Hi, I'm Nurzhanat Zhussup, a passionate software engineer and data scientist with a deep curiosity for technology. I'm {{age}} years old and born in Almaty, Kazakhstan 🇰🇿⛰️",
+      "text2": "I am currently based in Vienna, Austria 🇦🇹. I hold a degree in Economics from WU Vienna, which initially steered me towards a career in finance or the economics field. However, after taking a data science specialization, I discovered my love for coding. As I explored more of the tech world, my passion for programming grew stronger. I then realized that I truly wanted to be in the tech industry, which sparked my transition into software engineering. Since then, I have gained extensive skills in web development, focusing on both frontend and backend technologies. Additionally, with my specialization in data science, I possess strong knowledge of Machine Learning and Data Engineering. So, briefly speaking, I am just a guy who enjoys building things and learning something new. :)"
+    },
+    "hobbies": {
+      "title": "Hobbies",
+      "text1": "I absolutely love skiing ⛷️, and it's probably on the same level as coding for me, as I can't imagine my life without these two. :) In addition to skiing, I enjoy playing tennis and hiking. I also frequently watch Udemy courses as part of my self-development. Additionally, I like spending my time reading tech books to further expand my knowledge. Outside of these activities, I stay curious about the latest trends in technology and continuously seek new ways to improve both professionally and personally. Whether it's tackling a coding challenge or exploring the outdoors, I'm always looking for new experiences to grow and learn."
+    },
+    "links": {
+      "title": "Links",
+      "text1": "Either on the left side or above (depending on the device you're reading this on), you can find the most important links to get to know me better. I would highly encourage you to check out the projects section, where you can find the projects I am most proud of. Also, if you're interested, there is a CV section you can check out as well.",
+      "text2": "It was a pleasure sharing a bit about myself with you! :) I hope you enjoyed my little story. Hit these little LinkedIn or Email icons in the footer section to stay connected 🚀",
+      "listgroup_elements": {
+        "sm": {
+          "title": "Social Media",
+          "description": "Here you can find the links to my public social media accounts"
+        },
+        "proj": {
+          "title": "Projects",
+          "description": "Here you can find links to the source code of my projects"
+        },
+        "cv": {
+          "title": "Curriculum Vitae",
+          "description": "Here you can find my current CV including my current skills"
+        }
+      }
+    }
+  },
+
+  "cv_page": {
+    "title": "Curriculum Vitae",
+    "navigations": {
+      "work_experience": "Work Experience",
+      "education": "Education",
+      "skills": "Skills",
+      "certifications": "Certifications"
+    },
+    "buttons": {
+      "view_cert": "view certificate"
+    }
+  },
+
+  "projects_page": {
+    "title": "Projects",
+    "source_code_button": "view the source code"
+  },
+
+  "links_page": {
+    "title": "Links"
+  },
+  
+  "warnings": {
+    "only_available_in_english": "Sorry! This page is only available in english :(",
+    "partially_available": "Sorry! This page is only partially available in english :("
+  },
+  "exceptions": {
+    "not_found": {
+      "title": "404 - Page Not Found",
+      "description": "The page you're looking for does not exist."
+    }
+  }
+}
+  
+  

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import projectsData from "../config/projects.json";
+import UpButton from "../components/UpButton";
 
-const Projects = ({ isDarkMode }) => {
+const Projects = ({ isDarkMode, t }) => {
   const [projectDetails, setProjectDetails] = useState([]);
 
   // Function to fetch the repository metadata (including the description)
@@ -59,7 +60,8 @@ const Projects = ({ isDarkMode }) => {
 
   return (
     <div className='container px-4 py-5' id='hanging-icons'>
-      <h2 className='pb-2 border-bottom'>Projects</h2>
+      <UpButton isDarkMode={isDarkMode} />
+      <h2 className='pb-2 border-bottom'>{t("projects_page.title")}</h2>
       <div className='row g-4 py-5 row-cols-1 row-cols-sm-2 row-cols-md-2'>
         {projectDetails.map((project, index) => (
           <div className='col d-flex align-items-start' key={index}>
@@ -114,7 +116,7 @@ const Projects = ({ isDarkMode }) => {
                   isDarkMode ? "btn-secondary text-white" : "btn-dark"
                 } mt-3`}
               >
-                view the source code
+                {t("projects_page.source_code_button")}
               </a>
             </div>
           </div>

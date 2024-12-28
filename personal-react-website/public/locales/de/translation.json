@@ -1,0 +1,81 @@
+{
+  "navbar": {
+    "about_me": "über mich",
+    "cv": "lebenslauf",
+    "projects": "projekte",
+    "links": "links",
+    "language": "sprache"
+  },
+
+  "footer": {
+    "text": "© 2024 by nzhussup. alle rechte vorbehalten."
+  },
+
+  "about_me_page": {
+    "about_me": {
+      "title": "Über Mich",
+      "yep_thats_me": "<- Yep das bin ich :)",
+      "text1": "Hallo, ich bin Nurzhanat Zhussup, ein leidenschaftlicher Softwareingenieur und Datenwissenschaftler mit einer tiefen Neugier für Technologie. Ich bin {{age}} Jahre alt und in Almaty, Kasachstan 🇰🇿⛰️ geboren.",
+      "text2": "Momentan lebe ich in Wien, Österreich 🇦🇹. Ich habe einen Abschluss in Wirtschaftswissenschaften von der WU Wien, was mich zunächst in eine Karriere im Finanzwesen oder im Bereich Wirtschaft geführt hat. Nachdem ich jedoch eine Spezialisierung in Data Science gemacht habe, entdeckte ich meine Liebe zum Programmieren. Je mehr ich die Welt der Technologie erkundete, desto stärker wuchs meine Leidenschaft für das Programmieren. Schließlich wurde mir klar, dass ich wirklich in der Tech-Branche tätig sein möchte, was meinen Übergang in die Softwareentwicklung auslöste. Seitdem habe ich umfangreiche Fähigkeiten in der Webentwicklung erlangt, mit einem Fokus auf sowohl Frontend- als auch Backend-Technologien. Zusätzlich besitze ich durch meine Spezialisierung in Data Science fundiertes Wissen in den Bereichen Maschinelles Lernen und Datenengineering. Kurz gesagt, ich bin einfach ein Typ, der es liebt, Dinge zu bauen und Neues zu lernen. :)"
+    },
+    "hobbies": {
+      "title": "Hobbys",
+      "text1": "Ich liebe es, Ski zu fahren ⛷️, und es ist wahrscheinlich genauso wichtig für mich wie das Programmieren, da ich mir mein Leben ohne diese beiden Dinge nicht vorstellen kann. :) Neben dem Skifahren spiele ich gerne Tennis und gehe wandern. Ich schaue auch regelmäßig Udemy-Kurse als Teil meiner Selbstentwicklung. Außerdem verbringe ich gerne meine Zeit damit, technische Bücher zu lesen, um mein Wissen weiter auszubauen. Abgesehen von diesen Aktivitäten bleibe ich neugierig auf die neuesten Trends in der Technologie und suche ständig nach neuen Wegen, mich sowohl beruflich als auch persönlich zu verbessern. Egal, ob ich eine Programmierherausforderung angehe oder die Natur erkunde, ich bin immer auf der Suche nach neuen Erfahrungen, um zu wachsen und zu lernen."
+    },
+    "links": {
+      "title": "Links",
+      "text1": "Entweder auf der linken Seite oder oben (je nach Gerät, auf dem du dies liest), findest du die wichtigsten Links, um mich besser kennenzulernen. Ich empfehle dir sehr, den Bereich 'Projekte' anzusehen, wo du die Projekte finden kannst, auf die ich am meisten stolz bin. Wenn du interessiert bist, gibt es auch einen Abschnitt für den Lebenslauf, den du dir ebenfalls anschauen kannst.",
+      "text2": "Es war mir eine Freude, ein wenig über mich mit dir zu teilen! :) Ich hoffe, dir hat meine kleine Geschichte gefallen. Klicke auf die kleinen LinkedIn- oder E-Mail-Icons im Fußbereich, um in Verbindung zu bleiben 🚀",
+      "listgroup_elements": {
+        "sm": {
+          "title": "Soziale Medien",
+          "description": "Hier findest du die Links zu meinen öffentlichen Social-Media-Konten"
+        },
+        "proj": {
+          "title": "Projekte",
+          "description": "Hier findest du Links zum Quellcode meiner Projekte"
+        },
+        "cv": {
+          "title": "Lebenslauf",
+          "description": "Hier findest du meinen aktuellen Lebenslauf, einschließlich meiner aktuellen Skills"
+        }
+      }
+    }
+  },
+
+  "cv_page": {
+    "title": "Lebenslauf",
+    "navigations": {
+      "work_experience": "Berufserfahrung",
+      "education": "Ausbildung",
+      "skills": "Skills",
+      "certifications": "Zertifikate"
+    },
+    "buttons": {
+      "view_cert": "zertifikat ansehen"
+    }
+  },
+
+  "projects_page": {
+    "title": "Projekte",
+    "source_code_button": "quellcode ansehen"
+  },
+
+  "links_page": {
+    "title": "Links"
+  },
+
+  "warnings": {
+    "only_available_in_english": "Entschuldigung! Diese Seite ist nur auf Englisch verfügbar :(",
+    "partially_available": "Entschuldigung! Diese Seite ist nur teilweise auf Deutsch verfügbar :("
+  },
+  
+  "exceptions": {
+  "not_found": {
+    "title": "404 - Seite nicht gefunden",
+    "description": "Die Seite, die Sie suchen, existiert nicht."
+  }
+}
+
+
+}

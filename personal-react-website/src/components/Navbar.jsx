@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ isDarkMode, toggleDarkMode }) => {
+const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
   const navbarCollapseRef = useRef(null);
 
   // Close the navbar on mobile after a link is clicked
@@ -64,7 +64,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
                 aria-current='page'
                 onClick={closeNavbar}
               >
-                about me
+                {t("navbar.about_me")}
               </Link>
             </li>
             <li className='nav-item'>
@@ -75,7 +75,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
                 }`}
                 onClick={closeNavbar}
               >
-                curriculum vitae
+                {t("navbar.cv")}
               </Link>
             </li>
             <li className='nav-item'>
@@ -86,7 +86,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
                 }`}
                 onClick={closeNavbar}
               >
-                projects
+                {t("navbar.projects")}
               </Link>
             </li>
             <li className='nav-item'>
@@ -97,8 +97,48 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
                 }`}
                 onClick={closeNavbar}
               >
-                links
+                {t("navbar.links")}
               </Link>
+            </li>
+
+            {/* Language Dropdown */}
+            <li className='nav-item dropdown ms-3'>
+              <button
+                className={`btn btn-sm dropdown-toggle ${
+                  isDarkMode ? "btn-secondary" : "btn-light"
+                }`}
+                id='languageDropdown'
+                data-bs-toggle='dropdown'
+                aria-expanded='false'
+              >
+                {t("navbar.language")}
+              </button>
+              <ul className='dropdown-menu' aria-labelledby='languageDropdown'>
+                <li>
+                  <button
+                    className='dropdown-item'
+                    onClick={() => changeLanguage("en")}
+                  >
+                    english 🇬🇧
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className='dropdown-item'
+                    onClick={() => changeLanguage("de")}
+                  >
+                    deutsch 🇩🇪
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className='dropdown-item'
+                    onClick={() => changeLanguage("kz")}
+                  >
+                    қазақша 🇰🇿
+                  </button>
+                </li>
+              </ul>
             </li>
 
             {/* Dark Mode Toggle */}

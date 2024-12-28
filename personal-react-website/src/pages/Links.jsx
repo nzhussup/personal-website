@@ -1,9 +1,9 @@
 import React from "react";
 
-const Links = () => {
+const Links = ({ t }) => {
   return (
     <div className='container px-4 py-5' id='hanging-icons'>
-      <h2 className='pb-2 border-bottom'>Links</h2>
+      <h2 className='pb-2 border-bottom'>{t("links_page.title")}</h2>
       <div className='d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center'>
         <div className='list-group'>
           <a

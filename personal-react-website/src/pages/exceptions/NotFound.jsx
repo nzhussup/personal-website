@@ -1,10 +1,10 @@
 import React from "react";
 
-const NotFound = () => {
+const NotFound = ({ t }) => {
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>404 - Page Not Found</h1>
-      <p>The page you're looking for does not exist.</p>
+      <h1>{t("exceptions.not_found.title")}</h1>
+      <p>{t("exceptions.not_found.description")}</p>
     </div>
   );
 };
