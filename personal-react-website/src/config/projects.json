@@ -1,4 +1,11 @@
 {
+    "Personal Website's Admin Panel": {
+        "URL": "https://github.com/nzhussup/admin-panel-personal-website",
+        "Tech Stack": [
+            "Java", "JavaScript", "Docker", "Kubernetes", "Spring Boot", "Spring Security", "JWT", "React", "Bootstrap", "HTML", "CSS"
+        ]
+    },
+    
     "Kanban Board REST API": {
         "URL": "https://github.com/nzhussup/kanban-board",
         "Tech Stack": [
@@ -14,7 +21,7 @@
     "Personal React Website nzhussup.com": {
         "URL": "https://github.com/nzhussup/personal-website",
         "Tech Stack": [
-            "JavaScript", "React", "Bootstrap", "Docker", "Kubernetes", "Github Actions"
+            "JavaScript", "React", "Bootstrap", "HTML", "CSS", "Docker", "Kubernetes", "Github Actions"
         ]
     },
 
