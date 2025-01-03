@@ -53,6 +53,18 @@
     },
     "buttons": {
       "view_cert": "view certificate"
+    },
+    "errors": {
+      "work_experience": "Failed to load work experience.",
+      "education": "Failed to load education data.",
+      "skills": "Failed to load skills.",
+      "certifications": "Failed to load certifications."
+    },
+    "empty": {
+      "work_experience": "No work experience available.",
+      "education": "No education information available.",
+      "skills": "No skills information available.",
+      "certifications": "No certifications available."
     }
   },
 
@@ -73,7 +85,15 @@
     "not_found": {
       "title": "404 - Page Not Found",
       "description": "The page you're looking for does not exist."
+    },
+    "internal_server_error": {
+      "title": "500 - Internal Server Error",
+      "description": "An error occurred while processing your request."
     }
+  },
+  "common": {
+    "loading": "Loading...",
+    "please_wait": "Please wait while we fetch the data."
   }
 }
   

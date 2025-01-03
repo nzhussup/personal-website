@@ -53,6 +53,18 @@
     },
     "buttons": {
       "view_cert": "zertifikat ansehen"
+    },
+    "errors": {
+      "work_experience": "Laden der Berufserfahrung fehlgeschlagen.",
+      "education": "Laden der Bildungsdaten fehlgeschlagen.",
+      "skills": "Laden der Skills fehlgeschlagen.",
+      "certifications": "Laden der Zertifizierungen fehlgeschlagen."
+    },
+    "empty": {
+      "work_experience": "Keine Berufserfahrung verfügbar.",
+      "education": "Keine Bildungsinformationen verfügbar.",
+      "skills": "Keine Skills verfügbar.",
+      "certifications": "Keine Zertifizierungen verfügbar."
     }
   },
 
@@ -74,8 +86,14 @@
   "not_found": {
     "title": "404 - Seite nicht gefunden",
     "description": "Die Seite, die Sie suchen, existiert nicht."
+  },
+  "internal_server_error": {
+  "title": "500 - Interner Serverfehler",
+  "description": "Es ist ein Fehler bei der Verarbeitung Ihrer Anfrage aufgetreten."
+    }
+  },
+  "common": {
+    "loading": "Laden...",
+    "please_wait": "Bitte warten Sie, während wir die Daten abrufen."
   }
-}
-
-
 }

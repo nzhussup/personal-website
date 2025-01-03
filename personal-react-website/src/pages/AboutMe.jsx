@@ -4,12 +4,12 @@ import skiing from "../assets/nurik-skiing.jpeg";
 import forest from "../assets/forest.jpeg";
 import linkPhoto from "../assets/icons/link.svg";
 import { Link } from "react-router-dom";
-import AboutMeConfig from "../config/about_me_config";
+import config from "../config/AppConfig";
 import UpButton from "../components/UpButton";
 
 const AboutMe = ({ isDarkMode, t }) => {
   const birthdate = new Date("2002-09-03");
-  const today = new Date(); // Current date
+  const today = new Date();
 
   let age = today.getFullYear() - birthdate.getFullYear();
   const monthDifference = today.getMonth() - birthdate.getMonth();
@@ -33,9 +33,9 @@ const AboutMe = ({ isDarkMode, t }) => {
             className='img-fluid rounded-circle mb-3'
             style={{ width: "200px", height: "200px", objectFit: "cover" }}
           />
-          <h3 className='font-weight-bold'>{AboutMeConfig.name}</h3>
-          <p className='text-muted'>{AboutMeConfig.position}</p>
-          <p className='text-muted'>{AboutMeConfig.pos_company}</p>
+          <h3 className='font-weight-bold'>{config.about_me.name}</h3>
+          <p className='text-muted'>{config.about_me.position}</p>
+          <p className='text-muted'>{config.about_me.current_position}</p>
         </div>
 
         {/* About Me Text */}
