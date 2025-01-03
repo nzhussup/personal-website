@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import cvData from "../config/curriculum-vitae.json";
 import UpButton from "../components/UpButton";
+import CVSubNavbar from "../components/CVSubNavbar";
 
 const CurriculumVitae = ({ isDarkMode, t }) => {
   const {
@@ -20,43 +21,7 @@ const CurriculumVitae = ({ isDarkMode, t }) => {
       <UpButton isDarkMode={isDarkMode} />
 
       {/* Navigation Bar (Links to each section) */}
-      <nav className='mb-4'>
-        <ul className='nav justify-content-center text-decoration-underline'>
-          <li className='nav-item'>
-            <a
-              className={`nav-link ${isDarkMode ? "text-white" : "text-black"}`}
-              href='#work-experience'
-            >
-              {t("cv_page.navigations.work_experience")}
-            </a>
-          </li>
-          <li className='nav-item'>
-            <a
-              className={`nav-link ${isDarkMode ? "text-white" : "text-black"}`}
-              href='#education'
-            >
-              {t("cv_page.navigations.education")}
-            </a>
-          </li>
-          <li className='nav-item'>
-            <a
-              className={`nav-link ${isDarkMode ? "text-white" : "text-black"}`}
-              href='#skills'
-            >
-              {t("cv_page.navigations.skills")}
-            </a>
-          </li>
-          <li className='nav-item'>
-            <a
-              className={`nav-link ${isDarkMode ? "text-white" : "text-black"}`}
-              href='#certifications'
-            >
-              {t("cv_page.navigations.certifications")}
-            </a>
-          </li>
-        </ul>
-      </nav>
-
+      <CVSubNavbar isDarkMode={isDarkMode} t={t} />
       {/* Work Experience */}
       <section id='work-experience'>
         <h4 className='d-flex align-items-center mb-3'>
