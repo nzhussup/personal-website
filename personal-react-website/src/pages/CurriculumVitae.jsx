@@ -77,6 +77,9 @@ const CurriculumVitae = ({ isDarkMode, t }) => {
   // If errors occur while fetching data, I show the error message in the respective section. And if no data avaialble, I show the empty message.
 
   if (loading) {
+    if (showLoading) {
+      return <Loading t={t} />;
+    }
     return (
       <div className='container mt-4'>
         <h1 className='pb-2 border-bottom text-center'>{t("cv_page.title")}</h1>
@@ -84,10 +87,6 @@ const CurriculumVitae = ({ isDarkMode, t }) => {
         <CVSubNavbar isDarkMode={isDarkMode} t={t} />
       </div>
     );
-  }
-
-  if (loading && showLoading) {
-    return <Loading t={t} />;
   }
 
   const WorkIcon = (
