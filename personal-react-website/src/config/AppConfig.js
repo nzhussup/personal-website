@@ -19,7 +19,10 @@ const config = {
       base_url: "https://api.github.com/repos",
       token: import.meta.env.VITE_GITHUB_TOKEN
     }
-  }
+  },
+  variables: {
+    loadingTimeout: 200,
+  },
 };
 
 export default config;

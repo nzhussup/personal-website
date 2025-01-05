@@ -9,10 +9,17 @@ const Projects = ({ isDarkMode, t }) => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
     const fetchProjects = async () => {
       setLoading(true);
+      setShowLoading(false);
+
+      const delayTimeout = setTimeout(() => {
+        setShowLoading(true);
+      }, config.variables.loadingTimeout);
+
       setFetchError(false);
 
       try {
@@ -44,6 +51,8 @@ const Projects = ({ isDarkMode, t }) => {
         setFetchError(true);
         console.error("Error fetching projects:", error);
       } finally {
+        clearTimeout(delayTimeout);
+        setShowLoading(false);
         setLoading(false);
       }
     };
@@ -51,7 +60,7 @@ const Projects = ({ isDarkMode, t }) => {
     fetchProjects();
   }, []);
 
-  if (loading) {
+  if (loading && showLoading) {
     return <Loading t={t} />;
   }
 

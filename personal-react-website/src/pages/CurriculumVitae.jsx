@@ -15,6 +15,7 @@ const CurriculumVitae = ({ isDarkMode, t }) => {
   const [skills, setSkills] = useState([]);
   const [certifications, setCertifications] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showLoading, setShowLoading] = useState(false);
 
   const [fetchErrors, setFetchErrors] = useState({
     workExperience: false,
@@ -26,6 +27,11 @@ const CurriculumVitae = ({ isDarkMode, t }) => {
   useEffect(() => {
     const fetchAllData = async () => {
       setLoading(true);
+      setShowLoading(false);
+      const delayTimeout = setTimeout(() => {
+        setShowLoading(true);
+      }, config.variables.loadingTimeout);
+
       setFetchErrors({
         workExperience: false,
         education: false,
@@ -55,6 +61,8 @@ const CurriculumVitae = ({ isDarkMode, t }) => {
         if (certData.status === "fulfilled") setCertifications(certData.value);
         else setFetchErrors((prev) => ({ ...prev, certifications: true }));
       } finally {
+        clearTimeout(delayTimeout);
+        setShowLoading(false);
         setLoading(false);
       }
     };
@@ -62,7 +70,23 @@ const CurriculumVitae = ({ isDarkMode, t }) => {
     fetchAllData();
   }, []);
 
+  // Explanation of loading and showLoading: When refreshing page to not see the "no info available" message for a split second I show the cv title and subnavbar
+  // To avoid loading page flashing I only show it after a certain timeout defined in config.variables.loadingTimeout.
+  // If the data is loaded before the timeout, I don't show the loading page at all.
+  // If the data is not loaded after the timeout, I show the loading page until the data is loaded.
+  // If errors occur while fetching data, I show the error message in the respective section. And if no data avaialble, I show the empty message.
+
   if (loading) {
+    return (
+      <div className='container mt-4'>
+        <h1 className='pb-2 border-bottom text-center'>{t("cv_page.title")}</h1>
+        <UpButton isDarkMode={isDarkMode} />
+        <CVSubNavbar isDarkMode={isDarkMode} t={t} />
+      </div>
+    );
+  }
+
+  if (loading && showLoading) {
     return <Loading t={t} />;
   }
 
