@@ -4,6 +4,7 @@ import UpButton from "../components/UpButton";
 import Loading from "./waiting/Loading";
 import FetchError from "./exceptions/FetchError";
 import config from "../config/AppConfig";
+import PageWrapper from "../utils/SmoothPage";
 
 const Projects = ({ isDarkMode, t }) => {
   const [projects, setProjects] = useState([]);
@@ -69,75 +70,77 @@ const Projects = ({ isDarkMode, t }) => {
   }
 
   return (
-    <div className='container px-4 py-5' id='hanging-icons'>
-      <UpButton isDarkMode={isDarkMode} />
-      <h2 className='pb-2 border-bottom'>{t("projects_page.title")}</h2>
-      <div className='row g-4 py-5 row-cols-1 row-cols-sm-2 row-cols-md-2'>
-        {projects.map((project, index) => {
-          const techStackArray = project.techStack
-            ? project.techStack.split(",").map((tech) => tech.trim())
-            : [];
+    <PageWrapper>
+      <div className='container px-4 py-5' id='hanging-icons'>
+        <UpButton isDarkMode={isDarkMode} />
+        <h2 className='pb-2 border-bottom'>{t("projects_page.title")}</h2>
+        <div className='row g-4 py-5 row-cols-1 row-cols-sm-2 row-cols-md-2'>
+          {projects.map((project, index) => {
+            const techStackArray = project.techStack
+              ? project.techStack.split(",").map((tech) => tech.trim())
+              : [];
 
-          return (
-            <div className='col d-flex align-items-start' key={index}>
-              <div className='icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='16'
-                  height='16'
-                  fill='currentColor'
-                  className='bi bi-code-slash'
-                  viewBox='0 0 16 16'
-                >
-                  <path d='M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0' />
-                </svg>
-              </div>
-              <div>
-                <h3 className='fs-2 text-body-emphasis'>{project.name}</h3>
-                <p>{project.description}</p>
-                <div className='d-flex flex-wrap gap-2 mt-2'>
-                  {techStackArray.length > 0 ? (
-                    techStackArray.map((tech, idx) => (
+            return (
+              <div className='col d-flex align-items-start' key={index}>
+                <div className='icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='16'
+                    height='16'
+                    fill='currentColor'
+                    className='bi bi-code-slash'
+                    viewBox='0 0 16 16'
+                  >
+                    <path d='M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0' />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className='fs-2 text-body-emphasis'>{project.name}</h3>
+                  <p>{project.description}</p>
+                  <div className='d-flex flex-wrap gap-2 mt-2'>
+                    {techStackArray.length > 0 ? (
+                      techStackArray.map((tech, idx) => (
+                        <span
+                          key={idx}
+                          className={`badge ${
+                            isDarkMode
+                              ? "bg-secondary text-white"
+                              : "bg-light text-black"
+                          } rounded-pill`}
+                          style={{ fontSize: "14px" }}
+                        >
+                          {tech}
+                        </span>
+                      ))
+                    ) : (
                       <span
-                        key={idx}
                         className={`badge ${
                           isDarkMode
                             ? "bg-secondary text-white"
-                            : "bg-light text-black"
+                            : "bg-light text-muted"
                         } rounded-pill`}
                         style={{ fontSize: "14px" }}
                       >
-                        {tech}
+                        No tech stack available
                       </span>
-                    ))
-                  ) : (
-                    <span
-                      className={`badge ${
-                        isDarkMode
-                          ? "bg-secondary text-white"
-                          : "bg-light text-muted"
-                      } rounded-pill`}
-                      style={{ fontSize: "14px" }}
-                    >
-                      No tech stack available
-                    </span>
-                  )}
-                </div>
+                    )}
+                  </div>
 
-                <a
-                  href={project.url}
-                  className={`btn ${
-                    isDarkMode ? "btn-secondary text-white" : "btn-dark"
-                  } mt-3`}
-                >
-                  {t("projects_page.source_code_button")}
-                </a>
+                  <a
+                    href={project.url}
+                    className={`btn ${
+                      isDarkMode ? "btn-secondary text-white" : "btn-dark"
+                    } mt-3`}
+                  >
+                    {t("projects_page.source_code_button")}
+                  </a>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </PageWrapper>
   );
 };
 

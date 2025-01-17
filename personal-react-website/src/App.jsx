@@ -12,6 +12,7 @@ import WarningPopup from "./components/WarningPopup";
 import { useTheme } from "./hooks/useTheme";
 import { useLanguage } from "./hooks/useLanguage";
 import { Suspense } from "react";
+import PageWrapper from "./utils/SmoothPage";
 
 const App = () => {
   const { t, i18n } = useTranslation();
@@ -38,41 +39,46 @@ const App = () => {
 
   return (
     <>
-      <Navbar
-        isDarkMode={isDarkMode}
-        toggleDarkMode={toggleDarkMode}
-        changeLanguage={changeLanguage}
-        t={t}
-      />
-      {showWarning && (
-        <WarningPopup
-          showWarning={showWarning}
+      <PageWrapper>
+        <Navbar
+          isDarkMode={isDarkMode}
+          toggleDarkMode={toggleDarkMode}
+          changeLanguage={changeLanguage}
           t={t}
-          text={
-            location.pathname === "/curriculum-vitae"
-              ? t("warnings.partially_available")
-              : t("warnings.only_available_in_english")
-          }
         />
-      )}
-
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes location={location}>
-          <Route path='/' element={<AboutMe isDarkMode={isDarkMode} t={t} />} />
-          <Route
-            path='/curriculum-vitae'
-            element={<CurriculumVitae isDarkMode={isDarkMode} t={t} />}
+        {showWarning && (
+          <WarningPopup
+            showWarning={showWarning}
+            t={t}
+            text={
+              location.pathname === "/curriculum-vitae"
+                ? t("warnings.partially_available")
+                : t("warnings.only_available_in_english")
+            }
           />
-          <Route
-            path='/projects'
-            element={<Projects isDarkMode={isDarkMode} t={t} />}
-          />
-          <Route path='/links' element={<Links t={t} />} />
-          <Route path='*' element={<NotFound t={t} />} />
-        </Routes>
-      </Suspense>
+        )}
 
-      <Footer t={t} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes location={location}>
+            <Route
+              path='/'
+              element={<AboutMe isDarkMode={isDarkMode} t={t} />}
+            />
+            <Route
+              path='/curriculum-vitae'
+              element={<CurriculumVitae isDarkMode={isDarkMode} t={t} />}
+            />
+            <Route
+              path='/projects'
+              element={<Projects isDarkMode={isDarkMode} t={t} />}
+            />
+            <Route path='/links' element={<Links t={t} />} />
+            <Route path='*' element={<NotFound t={t} />} />
+          </Routes>
+        </Suspense>
+
+        <Footer t={t} />
+      </PageWrapper>
     </>
   );
 };
