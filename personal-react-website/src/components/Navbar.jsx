@@ -46,6 +46,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
   };
 
   const closeNavbar = () => setIsCollapsed(true);
+  const closeDropdown = () => setIsDropdownOpen(false);
 
   return (
     <nav
@@ -101,6 +102,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
                       }`}
                       onClick={() => {
                         handlePageChange("/");
+                        closeDropdown();
                         closeNavbar();
                       }}
                     >
@@ -114,6 +116,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
                       }`}
                       onClick={() => {
                         handlePageChange("/curriculum-vitae");
+                        closeDropdown();
                         closeNavbar();
                       }}
                     >
@@ -127,6 +130,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
                       }`}
                       onClick={() => {
                         handlePageChange("/projects");
+                        closeDropdown();
                         closeNavbar();
                       }}
                     >
@@ -140,6 +144,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
                       }`}
                       onClick={() => {
                         handlePageChange("/links");
+                        closeDropdown();
                         closeNavbar();
                       }}
                     >
@@ -173,6 +178,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
                           className='dropdown-item'
                           onClick={() => {
                             changeLanguage("en");
+                            closeDropdown();
                             closeNavbar();
                           }}
                         >
@@ -184,6 +190,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
                           className='dropdown-item'
                           onClick={() => {
                             changeLanguage("de");
+                            closeDropdown();
                             closeNavbar();
                           }}
                         >
@@ -195,6 +202,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
                           className='dropdown-item'
                           onClick={() => {
                             changeLanguage("kz");
+                            closeDropdown();
                             closeNavbar();
                           }}
                         >
