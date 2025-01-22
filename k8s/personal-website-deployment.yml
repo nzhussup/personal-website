@@ -18,13 +18,6 @@ spec:
           image: nzhussup/personal-website:latest
           ports:
             - containerPort: 8000
-          env:
-            - name: VITE_GITHUB_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: kanban-secrets
-                  key: VITE_GITHUB_TOKEN
-
 ---
 apiVersion: v1
 kind: Service
