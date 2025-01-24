@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { fetchData, fetchRepoDescription } from "../utils/apiUtil";
 import UpButton from "../components/UpButton";
 import Loading from "./waiting/Loading";
-import FetchError from "./exceptions/FetchError";
+import Unavailable from "./exceptions/Unavailable";
 import config from "../config/AppConfig";
 import PageWrapper from "../utils/SmoothPage";
 
@@ -66,7 +66,7 @@ const Projects = ({ isDarkMode, t }) => {
   }
 
   if (fetchError) {
-    return <FetchError t={t} />;
+    return <Unavailable t={t} />;
   }
 
   const PageContent = (

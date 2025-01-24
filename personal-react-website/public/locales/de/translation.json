@@ -83,13 +83,17 @@
   },
   
   "exceptions": {
-  "not_found": {
-    "title": "404 - Seite nicht gefunden",
-    "description": "Die Seite, die Sie suchen, existiert nicht."
-  },
-  "internal_server_error": {
-  "title": "500 - Interner Serverfehler",
-  "description": "Es ist ein Fehler bei der Verarbeitung Ihrer Anfrage aufgetreten."
+    "not_found": {
+      "title": "404 - Seite nicht gefunden",
+      "description": "Die Seite, die Sie suchen, existiert nicht."
+    },
+    "internal_server_error": {
+    "title": "500 - Interner Serverfehler",
+    "description": "Es ist ein Fehler bei der Verarbeitung Ihrer Anfrage aufgetreten."
+    },
+    "unavailable": {
+    "title": "503 - Vorübergehend nicht verfügbar",
+    "description": "Diese Seite ist vorübergehend nicht verfügbar :("
     }
   },
   "common": {

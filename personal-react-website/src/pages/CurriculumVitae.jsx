@@ -9,6 +9,7 @@ import Loading from "./waiting/Loading";
 import { formatDate } from "../utils/utilFunctions";
 import config from "../config/AppConfig";
 import PageWrapper from "../utils/SmoothPage";
+import Unavailable from "./exceptions/Unavailable";
 
 const CurriculumVitae = ({ isDarkMode, t }) => {
   const [workExperience, setWorkExperience] = useState([]);
@@ -24,6 +25,10 @@ const CurriculumVitae = ({ isDarkMode, t }) => {
     skills: false,
     certifications: false,
   });
+
+  const allFetchErrors = Object.values(fetchErrors).every(
+    (value) => value === true
+  );
 
   const WorkIcon = (
     <svg
@@ -128,6 +133,10 @@ const CurriculumVitae = ({ isDarkMode, t }) => {
     return <Loading t={t} />;
   }
 
+  if (allFetchErrors) {
+    return <Unavailable t={t} />;
+  }
+
   const PageContent = (
     <PageWrapper>
       <SectionList
@@ -144,7 +153,22 @@ const CurriculumVitae = ({ isDarkMode, t }) => {
               work.endDate ? work.endDate : "present"
             }`}
             isDarkMode={isDarkMode}
-          />
+          >
+            {work.techStack && (
+              <p className='text-muted'>
+                <strong>Tech Stack:</strong>
+                <div className='d-flex flex-wrap gap-2 mt-2'>
+                  {work.techStack.split(", ").map((name, idx) => (
+                    <SkillBadge
+                      key={idx}
+                      skill={name}
+                      isDarkMode={isDarkMode}
+                    />
+                  ))}
+                </div>
+              </p>
+            )}
+          </Card>
         )}
         isDarkMode={isDarkMode}
         emptyMessage={

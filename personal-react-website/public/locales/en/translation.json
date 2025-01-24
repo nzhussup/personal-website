@@ -89,6 +89,10 @@
     "internal_server_error": {
       "title": "500 - Internal Server Error",
       "description": "An error occurred while processing your request."
+    },
+    "unavailable": {
+      "title": "503 - Temporarily Unavailable",
+      "description": "This page is temporarily unavailable :("
     }
   },
   "common": {
