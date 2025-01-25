@@ -6,7 +6,7 @@ const config = {
   },
   api: {
     personal: {
-      base_url: "https://api.nzhussup.com/api/v1", 
+      base_url: "https://api.nzhussup.com/api/v1/base", 
       endpoints: {
         work_experience: "work-experience",
         education: "education",
