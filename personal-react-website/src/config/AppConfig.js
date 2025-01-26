@@ -1,18 +1,18 @@
 const config = {
   about_me: {
     name: "Nurzhanat Zhussup",
-    position: "Software Engineer | Data Scientist",
-    current_position: "Data Scientist @ Raiffeisen Bank International AG",
+    position: "Software Engineer | ex Data Scientist",
+    current_position: "Software Engineer @ Senacor Technologies AG",
   },
   api: {
     personal: {
-      base_url: "https://api.nzhussup.com/api/v1/base", 
+      base_url: "https://api.nzhussup.com/api/v1", 
       endpoints: {
-        work_experience: "work-experience",
-        education: "education",
-        projects: "project",
-        skills: "skill",
-        certifications: "certificate",
+        work_experience: "base/work-experience",
+        education: "base/education",
+        projects: "base/project",
+        skills: "base/skill",
+        certifications: "base/certificate",
       }
     },
     github: {
