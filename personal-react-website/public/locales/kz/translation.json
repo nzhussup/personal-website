@@ -3,6 +3,7 @@
     "about_me": "мен туралы",
     "cv": "резюме",
     "projects": "жобалар",
+    "albums": "альбомдар",
     "links": "сілтемелер",
     "language": "тіл"
   },
@@ -71,6 +72,11 @@
   "projects_page": {
     "title": "Жобалар",
     "source_code_button": "бастапқы кодты қарау"
+  },
+
+  "albums_page": {
+    "title": "Альбомдар",
+    "open_button": "ашу"
   },
 
   "links_page": {

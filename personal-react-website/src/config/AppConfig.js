@@ -6,6 +6,7 @@ const config = {
   },
   api: {
     personal: {
+      api_url: "https://api.nzhussup.com",
       base_url: "https://api.nzhussup.com/v1", 
       endpoints: {
         work_experience: "base/work-experience",
@@ -13,6 +14,7 @@ const config = {
         projects: "base/project",
         skills: "base/skill",
         certifications: "base/certificate",
+        albums: "album",
       }
     },
     github: {

@@ -18,6 +18,18 @@ export const fetchData = async (endpoint) => {
   }
 };
 
+export const fetchDataWithoutSort = async (endpoint) => {
+  try {
+    const response = await axios.get(
+      `${config.api.personal.base_url}/${endpoint}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(`Failed to fetch data from ${endpoint}:`, error);
+    throw error;
+  }
+};
+
 export const fetchRepoDescription = async (url) => {
   const repoName = url.split("/").slice(-2).join("/");
   const repoUrl = `${config.api.github.base_url}/${repoName}`;

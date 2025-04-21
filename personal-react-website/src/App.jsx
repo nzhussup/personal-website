@@ -13,6 +13,8 @@ import { useTheme } from "./hooks/useTheme";
 import { useLanguage } from "./hooks/useLanguage";
 import { Suspense } from "react";
 import PageWrapper from "./utils/SmoothPage";
+import AlbumPreview from "./pages/albums/AlbumPreview";
+import Album from "./pages/albums/Album";
 
 const App = () => {
   const { t, i18n } = useTranslation();
@@ -26,7 +28,8 @@ const App = () => {
     if (i18n.language === "de" || i18n.language === "kz") {
       if (
         location.pathname === "/curriculum-vitae" ||
-        location.pathname === "/projects"
+        location.pathname === "/projects" ||
+        location.pathname === "/albums"
       ) {
         setShowWarning(true);
       } else {
@@ -71,6 +74,14 @@ const App = () => {
             <Route
               path='/projects'
               element={<Projects isDarkMode={isDarkMode} t={t} />}
+            />
+            <Route
+              path='/albums'
+              element={<AlbumPreview isDarkMode={isDarkMode} t={t} />}
+            />
+            <Route
+              path='/albums/:albumID'
+              element={<Album isDarkMode={isDarkMode} t={t} />}
             />
             <Route path='/links' element={<Links t={t} />} />
             <Route path='*' element={<NotFound t={t} />} />

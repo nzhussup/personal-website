@@ -6,20 +6,15 @@ import { useTranslation } from "react-i18next";
 const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
   const navigate = useNavigate();
   const { i18n } = useTranslation();
+
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 991);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
+    const handleResize = () => setIsMobile(window.innerWidth <= 991);
     window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const collapseVariants = {
@@ -48,6 +43,87 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
   const closeNavbar = () => setIsCollapsed(true);
   const closeDropdown = () => setIsDropdownOpen(false);
 
+  const navItems = [
+    { label: t("navbar.about_me"), path: "/" },
+    { label: t("navbar.cv"), path: "/curriculum-vitae" },
+    { label: t("navbar.projects"), path: "/projects" },
+    { label: t("navbar.albums"), path: "/albums" },
+    { label: t("navbar.links"), path: "/links" },
+  ];
+
+  const renderNavItems = () =>
+    navItems.map((item) => (
+      <li className='nav-item' key={item.path}>
+        <button
+          className={`nav-link ${isDarkMode ? "text-white" : "text-black"}`}
+          onClick={() => {
+            handlePageChange(item.path);
+            closeDropdown();
+            closeNavbar();
+          }}
+        >
+          {item.label}
+        </button>
+      </li>
+    ));
+
+  const renderDropdown = () => (
+    <li className='nav-item dropdown ms-2 ms-sm-3'>
+      <button
+        className={`btn btn-sm dropdown-toggle ${
+          isDarkMode ? "btn-secondary" : "btn-light"
+        }`}
+        id='languageDropdown'
+        aria-expanded='false'
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+      >
+        {t("navbar.language")}
+      </button>
+      <motion.ul
+        className='dropdown-menu'
+        aria-labelledby='languageDropdown'
+        initial='collapsed'
+        animate={isDropdownOpen ? "open" : "collapsed"}
+        variants={dropdownVariants}
+        transition={{ duration: 0.3 }}
+      >
+        {["en", "de", "kz"].map((lang) => (
+          <li key={lang}>
+            <button
+              className='dropdown-item'
+              onClick={() => {
+                changeLanguage(lang);
+                closeDropdown();
+                closeNavbar();
+              }}
+            >
+              {lang === "en" && "english 🇬🇧"}
+              {lang === "de" && "deutsch 🇩🇪"}
+              {lang === "kz" && "қазақша 🇰🇿"}
+            </button>
+          </li>
+        ))}
+      </motion.ul>
+    </li>
+  );
+
+  const renderDarkModeToggle = () => (
+    <li className='nav-item ms-2 ms-sm-3'>
+      <div className='form-check form-switch'>
+        <input
+          className='form-check-input'
+          type='checkbox'
+          id='darkModeToggle'
+          checked={isDarkMode}
+          onChange={toggleDarkMode}
+        />
+        <label className='form-check-label' htmlFor='darkModeToggle'>
+          🌚
+        </label>
+      </div>
+    </li>
+  );
+
   return (
     <nav
       className={`navbar navbar-expand-lg ${
@@ -69,7 +145,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
           </span>
         </a>
 
-        {/* Toggle Button */}
+        {/* Toggle Button for Mobile */}
         {isMobile && (
           <button
             className='navbar-toggler'
@@ -82,7 +158,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
           </button>
         )}
 
-        {/* Collapsible Navbar for mobile */}
+        {/* Collapsible Navbar for Mobile */}
         {isMobile ? (
           <AnimatePresence>
             {!isCollapsed && (
@@ -94,142 +170,10 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
                 variants={collapseVariants}
                 transition={{ duration: 0.3 }}
               >
-                <ul className='navbar-nav ms-auto d-flex align-items-center'>
-                  <li className='nav-item'>
-                    <button
-                      className={`nav-link ${
-                        isDarkMode ? "text-white" : "text-black"
-                      }`}
-                      onClick={() => {
-                        handlePageChange("/");
-                        closeDropdown();
-                        closeNavbar();
-                      }}
-                    >
-                      {t("navbar.about_me")}
-                    </button>
-                  </li>
-                  <li className='nav-item'>
-                    <button
-                      className={`nav-link ${
-                        isDarkMode ? "text-white" : "text-black"
-                      }`}
-                      onClick={() => {
-                        handlePageChange("/curriculum-vitae");
-                        closeDropdown();
-                        closeNavbar();
-                      }}
-                    >
-                      {t("navbar.cv")}
-                    </button>
-                  </li>
-                  <li className='nav-item'>
-                    <button
-                      className={`nav-link ${
-                        isDarkMode ? "text-white" : "text-black"
-                      }`}
-                      onClick={() => {
-                        handlePageChange("/projects");
-                        closeDropdown();
-                        closeNavbar();
-                      }}
-                    >
-                      {t("navbar.projects")}
-                    </button>
-                  </li>
-                  <li className='nav-item'>
-                    <button
-                      className={`nav-link ${
-                        isDarkMode ? "text-white" : "text-black"
-                      }`}
-                      onClick={() => {
-                        handlePageChange("/links");
-                        closeDropdown();
-                        closeNavbar();
-                      }}
-                    >
-                      {t("navbar.links")}
-                    </button>
-                  </li>
-
-                  {/* Language Dropdown */}
-                  <li className='nav-item dropdown ms-2 ms-sm-3'>
-                    <button
-                      className={`btn btn-sm dropdown-toggle ${
-                        isDarkMode ? "btn-secondary" : "btn-light"
-                      }`}
-                      id='languageDropdown'
-                      data-bs-toggle='dropdown'
-                      aria-expanded='false'
-                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    >
-                      {t("navbar.language")}
-                    </button>
-                    <motion.ul
-                      className='dropdown-menu'
-                      aria-labelledby='languageDropdown'
-                      initial='collapsed'
-                      animate={isDropdownOpen ? "open" : "collapsed"}
-                      variants={dropdownVariants}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <li>
-                        <button
-                          className='dropdown-item'
-                          onClick={() => {
-                            changeLanguage("en");
-                            closeDropdown();
-                            closeNavbar();
-                          }}
-                        >
-                          english 🇬🇧
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className='dropdown-item'
-                          onClick={() => {
-                            changeLanguage("de");
-                            closeDropdown();
-                            closeNavbar();
-                          }}
-                        >
-                          deutsch 🇩🇪
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className='dropdown-item'
-                          onClick={() => {
-                            changeLanguage("kz");
-                            closeDropdown();
-                            closeNavbar();
-                          }}
-                        >
-                          қазақша 🇰🇿
-                        </button>
-                      </li>
-                    </motion.ul>
-                  </li>
-
-                  {/* Dark Mode Toggle */}
-                  <li className='nav-item ms-2 ms-sm-3'>
-                    <div className='form-check form-switch'>
-                      <input
-                        className='form-check-input'
-                        type='checkbox'
-                        id='darkModeToggle'
-                        checked={isDarkMode}
-                        onChange={toggleDarkMode}
-                      />
-                      <label
-                        className='form-check-label'
-                        htmlFor='darkModeToggle'
-                      >
-                        🌚
-                      </label>
-                    </div>
-                  </li>
+                <ul className='navbar-nav ms-auto d-flex flex-column align-items-center'>
+                  {renderNavItems()}
+                  {renderDropdown()}
+                  {renderDarkModeToggle()}
                 </ul>
               </motion.div>
             )}
@@ -238,105 +182,9 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
           // Regular Navbar for larger screens without animation
           <div className='navbar-collapse show'>
             <ul className='navbar-nav ms-auto d-flex align-items-center'>
-              <li className='nav-item'>
-                <button
-                  className={`nav-link ${
-                    isDarkMode ? "text-white" : "text-black"
-                  }`}
-                  onClick={() => handlePageChange("/")}
-                >
-                  {t("navbar.about_me")}
-                </button>
-              </li>
-              <li className='nav-item'>
-                <button
-                  className={`nav-link ${
-                    isDarkMode ? "text-white" : "text-black"
-                  }`}
-                  onClick={() => handlePageChange("/curriculum-vitae")}
-                >
-                  {t("navbar.cv")}
-                </button>
-              </li>
-              <li className='nav-item'>
-                <button
-                  className={`nav-link ${
-                    isDarkMode ? "text-white" : "text-black"
-                  }`}
-                  onClick={() => handlePageChange("/projects")}
-                >
-                  {t("navbar.projects")}
-                </button>
-              </li>
-              <li className='nav-item'>
-                <button
-                  className={`nav-link ${
-                    isDarkMode ? "text-white" : "text-black"
-                  }`}
-                  onClick={() => handlePageChange("/links")}
-                >
-                  {t("navbar.links")}
-                </button>
-              </li>
-
-              {/* Language Dropdown */}
-              <li className='nav-item dropdown ms-2 ms-sm-3'>
-                <button
-                  className={`btn btn-sm dropdown-toggle ${
-                    isDarkMode ? "btn-secondary" : "btn-light"
-                  }`}
-                  id='languageDropdown'
-                  data-bs-toggle='dropdown'
-                  aria-expanded='false'
-                >
-                  {t("navbar.language")}
-                </button>
-                <ul
-                  className='dropdown-menu'
-                  aria-labelledby='languageDropdown'
-                >
-                  <li>
-                    <button
-                      className='dropdown-item'
-                      onClick={() => changeLanguage("en")}
-                    >
-                      english 🇬🇧
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      className='dropdown-item'
-                      onClick={() => changeLanguage("de")}
-                    >
-                      deutsch 🇩🇪
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      className='dropdown-item'
-                      onClick={() => changeLanguage("kz")}
-                    >
-                      қазақша 🇰🇿
-                    </button>
-                  </li>
-                </ul>
-              </li>
-
-              {/* Dark Mode Toggle */}
-              <li className='nav-item ms-2 ms-sm-3'>
-                <div className='form-check form-switch'>
-                  <input
-                    className='form-check-input'
-                    type='checkbox'
-                    id='darkModeToggle'
-                    checked={isDarkMode}
-                    onChange={toggleDarkMode}
-                  />
-                  <label className='form-check-label' htmlFor='darkModeToggle'>
-                    🌚
-                  </label>
-                </div>
-              </li>
+              {renderNavItems()}
+              {renderDropdown()}
+              {renderDarkModeToggle()}
             </ul>
           </div>
         )}

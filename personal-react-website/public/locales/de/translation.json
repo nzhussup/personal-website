@@ -3,6 +3,7 @@
     "about_me": "über mich",
     "cv": "lebenslauf",
     "projects": "projekte",
+    "albums": "alben",
     "links": "links",
     "language": "sprache"
   },
@@ -72,7 +73,10 @@
     "title": "Projekte",
     "source_code_button": "quellcode ansehen"
   },
-
+  "albums_page": {
+    "title": "Alben",
+    "open_button": "öffnen"
+  },
   "links_page": {
     "title": "Links"
   },
