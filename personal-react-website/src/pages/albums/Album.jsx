@@ -55,6 +55,24 @@ const Album = ({ isDarkMode, t }) => {
   if (notFound) return <NotFound t={t} />;
   if (fetchError) return <Unavailable t={t} />;
   if (!album) return null;
+  if (album.images.length === 0) {
+    return (
+      <div className='container px-4 py-5' id='album-detail'>
+        <UpButton isDarkMode={isDarkMode} />
+        <h2 className='pb-2 border-bottom'>
+          {album.title}
+          {album.date ? `(${album.date})` : ""}
+        </h2>
+        <p className='text-muted'>{album.desc}</p>
+        <PageWrapper>
+          <div style={{ textAlign: "center", marginTop: "50px" }}>
+            <h1>{t("albums_page.empty.album.title")}</h1>
+            <p>{t("albums_page.empty.album.description")}</p>
+          </div>
+        </PageWrapper>
+      </div>
+    );
+  }
 
   return (
     <div className='container px-4 py-5' id='album-detail'>

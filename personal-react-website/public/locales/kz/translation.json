@@ -76,7 +76,15 @@
 
   "albums_page": {
     "title": "Альбомдар",
-    "open_button": "ашу"
+    "open_button": "ашу",
+    "empty": {
+      "title": "Альбомдар жоқ",
+      "description": "Көрсетуге болатын альбомдар жоқ.",
+      "album": {
+        "title": "Суреттер жоқ",
+        "description": "Көрсетуге болатын суреттер жоқ."
+      }
+    }
   },
 
   "links_page": {

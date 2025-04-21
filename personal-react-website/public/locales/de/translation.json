@@ -75,7 +75,15 @@
   },
   "albums_page": {
     "title": "Alben",
-    "open_button": "öffnen"
+    "open_button": "öffnen",
+    "empty": {
+      "title": "Keine Alben verfügbar",
+      "description": "Es gibt keine Alben, die angezeigt werden können.",
+      "album": {
+        "title": "Keine Bilder verfügbar",
+        "description": "Es gibt keine Bilder, die angezeigt werden können."
+      }
+    }
   },
   "links_page": {
     "title": "Links"

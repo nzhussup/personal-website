@@ -12,6 +12,7 @@ const AlbumPreview = ({ isDarkMode, t }) => {
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
+  const [showEmpty, setShowEmpty] = useState(false);
 
   useEffect(() => {
     const fetchAlbums = async () => {
@@ -43,12 +44,36 @@ const AlbumPreview = ({ isDarkMode, t }) => {
     fetchAlbums();
   }, []);
 
+  useEffect(() => {
+    const delayTimeout = setTimeout(() => {
+      setShowEmpty(true);
+    }, config.variables.loadingTimeout);
+    return () => {
+      clearTimeout(delayTimeout);
+    };
+  }, []);
+
   if (loading && showLoading) {
     return <Loading t={t} />;
   }
 
   if (fetchError) {
     return <Unavailable t={t} />;
+  }
+
+  if (albums.length === 0 && showEmpty) {
+    return (
+      <div className='container px-4 py-5' id='hanging-icons'>
+        <UpButton isDarkMode={isDarkMode} />
+        <h2 className='pb-2 border-bottom'>{t("albums_page.title")}</h2>
+        <PageWrapper>
+          <div style={{ textAlign: "center", marginTop: "50px" }}>
+            <h1>{t("albums_page.empty.title")}</h1>
+            <p>{t("albums_page.empty.description")}</p>
+          </div>
+        </PageWrapper>
+      </div>
+    );
   }
 
   const PageContent = (

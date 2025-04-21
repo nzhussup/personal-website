@@ -75,7 +75,15 @@
   },
   "albums_page": {
     "title": "Albums",
-    "open_button": "open"
+    "open_button": "open",
+    "empty": {
+      "title": "No albums available",
+      "description": "There are no albums to display.",
+      "album": {
+        "title": "No images available",
+        "description": "There are no images to display."
+      }
+    }
   },
 
   "links_page": {
