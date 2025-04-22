@@ -77,7 +77,10 @@ const Album = ({ isDarkMode, t }) => {
   return (
     <div className='container px-4 py-5' id='album-detail'>
       <UpButton isDarkMode={isDarkMode} />
-      <h2 className='pb-2 border-bottom'>{album.title}</h2>
+      <h2 className='pb-2 border-bottom'>
+        {album.title}
+        {` ${album.date ? `(${album.date})` : ""}`}
+      </h2>
       <p className='text-muted'>{album.desc}</p>
       <PageWrapper>
         <AlbumCard images={album.images} isDarkMode={isDarkMode} />
