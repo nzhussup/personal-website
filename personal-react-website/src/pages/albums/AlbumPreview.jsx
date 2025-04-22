@@ -30,6 +30,30 @@ const AlbumPreview = ({ isDarkMode, t }) => {
           config.api.personal.endpoints.albums
         );
 
+        // Sort albums with a valid date (newest to oldest) first, then those without a date.
+        const sortedAlbums = fetchedAlbums.sort((a, b) => {
+          const dateA = a.date ? new Date(a.date) : null;
+          const dateB = b.date ? new Date(b.date) : null;
+
+          if (dateA && dateB) {
+            // Both have dates, sort by date (newest to oldest)
+            return dateB - dateA;
+          }
+
+          if (dateA) {
+            // Only a has a date, so a should come first
+            return -1;
+          }
+
+          if (dateB) {
+            // Only b has a date, so b should come first
+            return 1;
+          }
+
+          // Neither have dates, keep their order
+          return 0;
+        });
+
         setAlbums(fetchedAlbums);
       } catch (error) {
         setFetchError(true);
