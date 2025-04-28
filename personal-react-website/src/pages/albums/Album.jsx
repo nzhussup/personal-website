@@ -33,7 +33,7 @@ const Album = ({ isDarkMode, t }) => {
           config.api.personal.endpoints.albums + `/${albumID}`
         );
         console.log("Fetched album:", fetchedAlbum);
-        setAlbum(fetchedAlbum);
+        setAlbum(fetchedAlbum.data);
       } catch (error) {
         if (error.status === 404) {
           setNotFound(true);

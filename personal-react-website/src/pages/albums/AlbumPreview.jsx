@@ -31,7 +31,7 @@ const AlbumPreview = ({ isDarkMode, t }) => {
         );
 
         // Sort albums with a valid date (newest to oldest) first, then those without a date.
-        const sortedAlbums = fetchedAlbums.sort((a, b) => {
+        const sortedAlbums = fetchedAlbums.data.sort((a, b) => {
           const dateA = a.date ? new Date(a.date) : null;
           const dateB = b.date ? new Date(b.date) : null;
 
@@ -54,7 +54,7 @@ const AlbumPreview = ({ isDarkMode, t }) => {
           return 0;
         });
 
-        setAlbums(fetchedAlbums);
+        setAlbums(sortedAlbums);
       } catch (error) {
         setFetchError(true);
         console.error("Error fetching albums:", error);
