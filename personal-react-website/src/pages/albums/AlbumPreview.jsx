@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchData } from "../../utils/apiUtil";
+import { fetchData, fetchDataWithoutSort } from "../../utils/apiUtil";
 import UpButton from "../../components/UpButton";
 import Loading from "../waiting/Loading";
 import Unavailable from "../exceptions/Unavailable";
@@ -26,12 +26,13 @@ const AlbumPreview = ({ isDarkMode, t }) => {
       setFetchError(false);
 
       try {
-        const fetchedAlbums = await fetchData(
+        const response = await fetchDataWithoutSort(
           config.api.personal.endpoints.albums
         );
+        const fetchedAlbums = response.data;
 
         // Sort albums with a valid date (newest to oldest) first, then those without a date.
-        const sortedAlbums = fetchedAlbums.data.sort((a, b) => {
+        const sortedAlbums = fetchedAlbums.sort((a, b) => {
           const dateA = a.date ? new Date(a.date) : null;
           const dateB = b.date ? new Date(b.date) : null;
 

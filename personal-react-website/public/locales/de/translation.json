@@ -39,6 +39,10 @@
         "cv": {
           "title": "Lebenslauf",
           "description": "Hier findest du meinen aktuellen Lebenslauf, einschließlich meiner aktuellen Skills"
+        },
+        "alb": {
+          "title": "Alben",
+          "description": "Hier findest du meine Alben mit Bildern von meinen Reisen"
         }
       }
     }

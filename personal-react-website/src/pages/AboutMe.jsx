@@ -93,7 +93,7 @@ const AboutMe = ({ isDarkMode, t }) => {
         {/* Row 3: Links*/}
         <div className='row mt-5 g-4'>
           {/* Links list group */}
-          <div className='col-md-6'>
+          <div className='col-md-7'>
             <div className='d-flex justify-content-around position-relative'>
               <div className='list-group'>
                 <Link
@@ -177,12 +177,39 @@ const AboutMe = ({ isDarkMode, t }) => {
                     </div>
                   </div>
                 </Link>
+                <Link
+                  to='/albums'
+                  className='list-group-item list-group-item-action d-flex gap-3 py-3'
+                  aria-current='page'
+                >
+                  <img
+                    src={linkPhoto}
+                    alt='link logo'
+                    width='32'
+                    height='32'
+                    className={`rounded-circle flex-shrink-0 ${
+                      isDarkMode ? "bg-light p-1" : ""
+                    }`}
+                  />
+                  <div className='d-flex gap-2 w-100 justify-content-between'>
+                    <div>
+                      <h6 className='mb-0'>
+                        {t("about_me_page.links.listgroup_elements.alb.title")}
+                      </h6>
+                      <p className='mb-0 opacity-75'>
+                        {t(
+                          "about_me_page.links.listgroup_elements.alb.description"
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
 
           {/* Links text */}
-          <div className='col-md-6'>
+          <div className='col-md-5'>
             <h4>{t("about_me_page.links.title")}</h4>
             <p>{t("about_me_page.links.text1")}</p>
             <p>{t("about_me_page.links.text2")}</p>

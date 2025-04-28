@@ -39,6 +39,10 @@
         "cv": {
           "title": "Curriculum Vitae",
           "description": "Here you can find my current CV including my current skills"
+        },
+        "alb": {
+          "title": "Albums",
+          "description": "Here you can find my albums with pictures from my travels"
         }
       }
     }
