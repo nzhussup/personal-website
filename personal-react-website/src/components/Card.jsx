@@ -1,3 +1,4 @@
+import { desc } from "framer-motion/client";
 import React from "react";
 
 const Card = ({
@@ -13,7 +14,11 @@ const Card = ({
   <div className='card mb-3 shadow-sm rounded-lg'>
     <div className='card-body'>
       <h5 className='card-title text-body-emphasis mb-2'>{title}</h5>
-      {description && <p className='card-text text-muted'>{description}</p>}
+      {description && (
+        <p className='card-text text-muted'>
+          <span style={{ whiteSpace: "pre-line" }}>{description}</span>
+        </p>
+      )}
       {location && (
         <p className='text-muted'>
           <strong>Location:</strong> {location}
