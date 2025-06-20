@@ -29,6 +29,21 @@
   color: #fff;
 }
 
+/* Responsive styling for small screens */
+@media (max-width: 576px) {
+  .ai-gen-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    min-width: 160px;
+    border-radius: 999px;
+  }
+
+  .ai-gen-button svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
 .ai-gen-button:hover {
   background: linear-gradient(
     135deg,
