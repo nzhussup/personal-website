@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import nurikImage from "../assets/nurik.jpeg";
 import skiing from "../assets/nurik-skiing.jpeg";
 import forest from "../assets/forest.jpeg";
@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 import config from "../config/AppConfig";
 import UpButton from "../components/UpButton";
 import PageWrapper from "../utils/SmoothPage";
+import AIGenButton from "../components/AIGenButton";
+import "../components/AIGenButton.css";
+import { fetchSummary } from "../utils/apiUtil";
 
 const AboutMe = ({ isDarkMode, t }) => {
   const birthdate = new Date("2002-09-03");
@@ -20,6 +23,73 @@ const AboutMe = ({ isDarkMode, t }) => {
   ) {
     age--;
   }
+
+  const [fullSummary, setFullSummary] = useState("");
+  const [generatedText, setGeneratedText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [isSummaryLoaded, setIsSummaryLoaded] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [hasRequestedGeneration, setHasRequestedGeneration] = useState(false);
+
+  useEffect(() => {
+    const loadSummary = async () => {
+      try {
+        const summary = await fetchSummary();
+        setFullSummary(summary);
+      } catch (error) {
+        console.error("Failed to fetch summary:", error);
+        setFullSummary("Currently, no summary is available... :(");
+      } finally {
+        setIsSummaryLoaded(true);
+        setLoading(false);
+      }
+    };
+
+    loadSummary();
+  }, []);
+
+  const startGenerating = () => {
+    if (!isSummaryLoaded) {
+      setHasRequestedGeneration(true); // Will generate after summary loads
+    } else {
+      setHasRequestedGeneration(false);
+      setGeneratedText("");
+      setCurrentIndex(0);
+      setIsGenerating(true);
+    }
+  };
+
+  // Automatically start generating once loading finishes, if user requested it:
+  useEffect(() => {
+    if (isSummaryLoaded && hasRequestedGeneration) {
+      setHasRequestedGeneration(false);
+      setGeneratedText("");
+      setCurrentIndex(0);
+      setIsGenerating(true);
+    }
+  }, [isSummaryLoaded, hasRequestedGeneration]);
+
+  useEffect(() => {
+    if (!isGenerating) return;
+
+    let index = 0;
+
+    const interval = setInterval(() => {
+      index += 1; // increase by 10 chars per interval
+      if (index > fullSummary.length) index = fullSummary.length;
+
+      setGeneratedText(fullSummary.slice(0, index));
+      setCurrentIndex(index);
+
+      if (index >= fullSummary.length) {
+        clearInterval(interval);
+        setIsGenerating(false);
+      }
+    }, 10); // slower interval for visible typing
+
+    return () => clearInterval(interval);
+  }, [isGenerating]);
 
   return (
     <PageWrapper>
@@ -42,7 +112,53 @@ const AboutMe = ({ isDarkMode, t }) => {
 
           {/* About Me Text */}
           <div className='col-md-8'>
-            <h2>{t("about_me_page.about_me.title")}</h2>
+            <div className='d-flex align-items-center justify-content-between flex-wrap mb-3'>
+              <h2 className='mb-0'>{t("about_me_page.about_me.title")}</h2>
+              <div
+                className='ms-3 d-flex align-items-center'
+                style={{ marginTop: "-15px" }}
+              >
+                <AIGenButton
+                  isDarkMode={isDarkMode}
+                  onStartGenerating={startGenerating}
+                />
+              </div>
+            </div>
+
+            {hasRequestedGeneration && !isSummaryLoaded ? (
+              <div className='text-center my-3'>
+                <div className='custom-spinner'></div>
+              </div>
+            ) : (
+              <>{/* Existing generatedText JSX */}</>
+            )}
+
+            {generatedText && (
+              <div
+                className='p-3 rounded mb-3'
+                style={{ backgroundColor: "transparent" }}
+              >
+                <p
+                  className='mb-0'
+                  style={{ fontFamily: "Courier New, monospace" }}
+                >
+                  {/* Static part is everything except last 10 chars if generating */}
+                  <span>
+                    {isGenerating
+                      ? generatedText.slice(0, currentIndex - 10)
+                      : generatedText}
+                  </span>
+
+                  {/* Shiny part only when generating */}
+                  {isGenerating && (
+                    <span className={`summary-box`}>
+                      {generatedText.slice(currentIndex - 10, currentIndex)}
+                    </span>
+                  )}
+                </p>
+              </div>
+            )}
+
             <p>{t("about_me_page.about_me.yep_thats_me")}</p>
             <p>{t("about_me_page.about_me.text1", { age })}</p>
             <p>{t("about_me_page.about_me.text2")}</p>

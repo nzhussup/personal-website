@@ -58,3 +58,15 @@ export const fetchRepoDescription = async (url) => {
     return "Failed to fetch repository description.";
   }
 };
+
+export const fetchSummary = async (lang) => {
+  try {
+    const response = await axios.get(
+      `${config.api.personal.base_url}/summarizer?lang=${lang}`
+    );
+    return response.data["message"];
+  } catch (error) {
+    console.error("Failed to fetch summary:", error);
+    throw error;
+  }
+};
