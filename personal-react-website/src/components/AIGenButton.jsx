@@ -1,10 +1,45 @@
-import React from "react";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Pause, Play } from "lucide-react";
 import "./AIGenButton.css";
 
-const AIGenButton = ({ isDarkMode, onStartGenerating }) => {
+const AIGenButton = ({
+  texts: { title, pause, resume },
+  isDarkMode,
+  isGenerating,
+  isPaused,
+  onStartGenerating,
+  onPauseResume,
+}) => {
+  const buttonStyle = isDarkMode ? "btn-dark" : "btn-light";
+
+  const renderContent = () => {
+    if (isGenerating) {
+      return (
+        <>
+          {isPaused ? <Play size={16} /> : <Pause size={16} />}
+          {isPaused ? resume : pause}
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Sparkles
+            size={16}
+            style={{
+              stroke: "url(#sparkle-gradient)",
+            }}
+          />
+          {title || "AI Summary"}
+        </>
+      );
+    }
+  };
+
   const handleClick = () => {
-    if (onStartGenerating) onStartGenerating();
+    if (isGenerating && onPauseResume) {
+      onPauseResume();
+    } else if (!isGenerating && onStartGenerating) {
+      onStartGenerating();
+    }
   };
 
   return (
@@ -27,16 +62,10 @@ const AIGenButton = ({ isDarkMode, onStartGenerating }) => {
 
       <button
         onClick={handleClick}
-        className={`ai-gen-button ${isDarkMode ? "btn-dark" : "btn-light"}`}
+        className={`ai-gen-button ${buttonStyle}`}
         aria-live='polite'
       >
-        <Sparkles
-          size={16}
-          style={{
-            stroke: "url(#sparkle-gradient)",
-          }}
-        />
-        Generate Summary with AI
+        {renderContent()}
       </button>
     </div>
   );

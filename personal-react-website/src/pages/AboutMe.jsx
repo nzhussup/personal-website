@@ -29,25 +29,32 @@ const AboutMe = ({ isDarkMode, t }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isSummaryLoaded, setIsSummaryLoaded] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [hasRequestedGeneration, setHasRequestedGeneration] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     const loadSummary = async () => {
       try {
-        const summary = await fetchSummary();
+        const summary = await fetchSummary(
+          localStorage.getItem("language") || "en"
+        );
         setFullSummary(summary);
+
+        if (isGenerating) {
+          // Immediately reset generation with new summary
+          setGeneratedText("");
+          setCurrentIndex(0);
+        }
       } catch (error) {
         console.error("Failed to fetch summary:", error);
-        setFullSummary("Currently, no summary is available... :(");
+        setFullSummary(t("about_me_page.ai.not_available"));
       } finally {
         setIsSummaryLoaded(true);
-        setLoading(false);
       }
     };
 
     loadSummary();
-  }, []);
+  }, [t]);
 
   const startGenerating = () => {
     if (!isSummaryLoaded) {
@@ -58,6 +65,15 @@ const AboutMe = ({ isDarkMode, t }) => {
       setCurrentIndex(0);
       setIsGenerating(true);
     }
+  };
+
+  const handlePauseResume = () => {
+    setIsPaused((prev) => !prev);
+  };
+
+  const handleStart = () => {
+    setIsPaused(false);
+    startGenerating();
   };
 
   // Automatically start generating once loading finishes, if user requested it:
@@ -71,25 +87,27 @@ const AboutMe = ({ isDarkMode, t }) => {
   }, [isSummaryLoaded, hasRequestedGeneration]);
 
   useEffect(() => {
-    if (!isGenerating) return;
-
-    let index = 0;
+    if (!isGenerating || isPaused || currentIndex >= fullSummary.length) return;
 
     const interval = setInterval(() => {
-      index += 1; // increase by 10 chars per interval
-      if (index > fullSummary.length) index = fullSummary.length;
+      setGeneratedText((prev) => {
+        const nextIndex = currentIndex + 1;
+        const nextText = fullSummary.slice(0, nextIndex);
+        return nextText;
+      });
 
-      setGeneratedText(fullSummary.slice(0, index));
-      setCurrentIndex(index);
-
-      if (index >= fullSummary.length) {
-        clearInterval(interval);
-        setIsGenerating(false);
-      }
-    }, 10); // slower interval for visible typing
+      setCurrentIndex((prev) => {
+        const next = prev + 1;
+        if (next >= fullSummary.length) {
+          clearInterval(interval);
+          setIsGenerating(false);
+        }
+        return next;
+      });
+    }, 10);
 
     return () => clearInterval(interval);
-  }, [isGenerating]);
+  }, [isGenerating, isPaused, fullSummary, currentIndex]);
 
   return (
     <PageWrapper>
@@ -119,8 +137,16 @@ const AboutMe = ({ isDarkMode, t }) => {
                 style={{ marginTop: "-15px" }}
               >
                 <AIGenButton
+                  texts={{
+                    title: t("about_me_page.ai.title"),
+                    pause: t("about_me_page.ai.pause"),
+                    resume: t("about_me_page.ai.resume"),
+                  }}
                   isDarkMode={isDarkMode}
-                  onStartGenerating={startGenerating}
+                  isGenerating={isGenerating}
+                  isPaused={isPaused}
+                  onStartGenerating={handleStart}
+                  onPauseResume={handlePauseResume}
                 />
               </div>
             </div>
@@ -142,17 +168,16 @@ const AboutMe = ({ isDarkMode, t }) => {
                   className='mb-0'
                   style={{ fontFamily: "Courier New, monospace" }}
                 >
-                  {/* Static part is everything except last 10 chars if generating */}
                   <span>
                     {isGenerating
-                      ? generatedText.slice(0, currentIndex - 10)
+                      ? generatedText.slice(0, currentIndex - 35)
                       : generatedText}
                   </span>
 
                   {/* Shiny part only when generating */}
                   {isGenerating && (
                     <span className={`summary-box`}>
-                      {generatedText.slice(currentIndex - 10, currentIndex)}
+                      {generatedText.slice(currentIndex - 35, currentIndex)}
                     </span>
                   )}
                 </p>

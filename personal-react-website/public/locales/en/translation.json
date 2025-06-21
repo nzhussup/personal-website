@@ -9,10 +9,16 @@
   },
 
   "footer": {
-      "text": "© 2024 by nzhussup. all rights reserved."
+    "text": "© 2024 by nzhussup. all rights reserved."
   },
 
   "about_me_page": {
+    "ai": {
+      "title": "AI Summary",
+      "pause": "Pause",
+      "resume": "Resume",
+      "not_available": "Currently, no summary is available... :("
+    },
     "about_me": {
       "title": "About Me",
       "yep_thats_me": "<- Yep that's me :)",
@@ -93,7 +99,7 @@
   "links_page": {
     "title": "Links"
   },
-  
+
   "warnings": {
     "only_available_in_english": "Sorry! This page is only available in english :(",
     "partially_available": "Sorry! This page is only partially available in english :("
@@ -117,5 +123,3 @@
     "please_wait": "Please wait while we fetch the data."
   }
 }
-  
-  
