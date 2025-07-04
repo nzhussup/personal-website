@@ -62,7 +62,7 @@ export const fetchRepoDescription = async (url) => {
 export const fetchSummary = async (lang) => {
   try {
     const response = await axios.get(
-      `${config.api.personal.base_url}/summarizer?lang=${lang}`
+      `${config.api.personal.base_url}/llm/summarize?lang=${lang}`
     );
     return response.data["message"];
   } catch (error) {
