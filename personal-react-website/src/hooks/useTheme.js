@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
+import { updateParam } from "../utils/urlUtil";
 
 export const useTheme = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const DEFAULT_MODE = "light";
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     const modeFromUrl = new URLSearchParams(window.location.search).get("mode");
 
     // Sync theme with URL or localStorage
-    const mode = modeFromUrl || savedTheme || "light";
+    const mode = modeFromUrl || savedTheme || DEFAULT_MODE;
     setTheme(mode);
   }, []);
 
@@ -23,14 +25,9 @@ export const useTheme = () => {
     const newTheme = isDarkMode ? "light" : "dark";
     setTheme(newTheme);
 
-    // Update URL without reloading
-    const currentSearchParams = new URLSearchParams(window.location.search);
-    currentSearchParams.set("mode", newTheme);
-    window.history.replaceState(
-      null,
-      "",
-      `${window.location.pathname}?${currentSearchParams.toString()}`
-    );
+    // Update URL preserving other query parameters
+    const newUrl = updateParam("mode", newTheme);
+    window.history.replaceState(null, "", newUrl);
   };
 
   return [isDarkMode, toggleTheme];

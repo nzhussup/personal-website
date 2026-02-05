@@ -1,13 +1,16 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { buildUrl, getCurrentParams } from "../utils/urlUtil";
 
 const AlbumPreviewCard = ({ album, isDarkMode }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/albums/${album.id}`);
+    const currentParams = getCurrentParams();
+    const urlWithParams = buildUrl(`/albums/${album.id}`, currentParams);
+    navigate(urlWithParams);
   };
 
   return (

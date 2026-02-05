@@ -10,8 +10,10 @@ import PageWrapper from "../utils/SmoothPage";
 import AIGenButton from "../components/AIGenButton";
 import "../components/AIGenButton.css";
 import { fetchSummary } from "../utils/apiUtil";
+import { buildUrl, getCurrentParams } from "../utils/urlUtil";
 
 const AboutMe = ({ isDarkMode, t }) => {
+  const currentParams = getCurrentParams();
   const birthdate = new Date("2002-09-03");
   const today = new Date();
 
@@ -36,7 +38,7 @@ const AboutMe = ({ isDarkMode, t }) => {
     const loadSummary = async () => {
       try {
         const summary = await fetchSummary(
-          localStorage.getItem("language") || "en"
+          localStorage.getItem("language") || "en",
         );
         setFullSummary(summary);
 
@@ -238,7 +240,7 @@ const AboutMe = ({ isDarkMode, t }) => {
             <div className='d-flex justify-content-around position-relative'>
               <div className='list-group'>
                 <Link
-                  to='/links'
+                  to={buildUrl("/links", currentParams)}
                   className='list-group-item list-group-item-action d-flex gap-3 py-3'
                   aria-current='page'
                 >
@@ -258,14 +260,14 @@ const AboutMe = ({ isDarkMode, t }) => {
                       </h6>
                       <p className='mb-0 opacity-75'>
                         {t(
-                          "about_me_page.links.listgroup_elements.sm.description"
+                          "about_me_page.links.listgroup_elements.sm.description",
                         )}
                       </p>
                     </div>
                   </div>
                 </Link>
                 <Link
-                  to='/projects'
+                  to={buildUrl("/projects", currentParams)}
                   className='list-group-item list-group-item-action d-flex gap-3 py-3'
                   aria-current='page'
                 >
@@ -285,14 +287,14 @@ const AboutMe = ({ isDarkMode, t }) => {
                       </h6>
                       <p className='mb-0 opacity-75'>
                         {t(
-                          "about_me_page.links.listgroup_elements.proj.description"
+                          "about_me_page.links.listgroup_elements.proj.description",
                         )}
                       </p>
                     </div>
                   </div>
                 </Link>
                 <Link
-                  to='/curriculum-vitae'
+                  to={buildUrl("/curriculum-vitae", currentParams)}
                   className='list-group-item list-group-item-action d-flex gap-3 py-3'
                   aria-current='page'
                 >
@@ -312,14 +314,14 @@ const AboutMe = ({ isDarkMode, t }) => {
                       </h6>
                       <p className='mb-0 opacity-75'>
                         {t(
-                          "about_me_page.links.listgroup_elements.cv.description"
+                          "about_me_page.links.listgroup_elements.cv.description",
                         )}
                       </p>
                     </div>
                   </div>
                 </Link>
                 <Link
-                  to='/albums'
+                  to={buildUrl("/albums", currentParams)}
                   className='list-group-item list-group-item-action d-flex gap-3 py-3'
                   aria-current='page'
                 >
@@ -339,7 +341,7 @@ const AboutMe = ({ isDarkMode, t }) => {
                       </h6>
                       <p className='mb-0 opacity-75'>
                         {t(
-                          "about_me_page.links.listgroup_elements.alb.description"
+                          "about_me_page.links.listgroup_elements.alb.description",
                         )}
                       </p>
                     </div>

@@ -27,7 +27,7 @@ const CurriculumVitae = ({ isDarkMode, t }) => {
   });
 
   const allFetchErrors = Object.values(fetchErrors).every(
-    (value) => value === true
+    (value) => value === true,
   );
 
   const WorkIcon = (
@@ -128,6 +128,29 @@ const CurriculumVitae = ({ isDarkMode, t }) => {
 
     fetchAllData();
   }, []);
+
+  // Scroll to hash section when page loads or hash changes
+  useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const id = hash.substring(1); // Remove the '#'
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    };
+
+    if (!loading) {
+      // Delay to account for page animation (500ms) plus render time
+      setTimeout(scrollToHash, 600);
+    }
+
+    // Listen for hash changes
+    window.addEventListener("hashchange", scrollToHash);
+    return () => window.removeEventListener("hashchange", scrollToHash);
+  }, [loading]);
 
   if (loading && showLoading) {
     return <Loading t={t} />;

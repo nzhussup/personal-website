@@ -1,18 +1,19 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { updateParam, getCurrentParams } from "../utils/urlUtil";
 
 export const useLanguage = () => {
   const { i18n } = useTranslation();
 
   // App remembers the chosen language only one day. Then it resets to en.
   const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+  const DEFAULT_LANGUAGE = "en";
 
-  const resetLanguage = (i18n, defaultLanguage = "en") => {
-  i18n.changeLanguage(defaultLanguage);
-  localStorage.setItem("language", defaultLanguage);
-  localStorage.setItem("language_timestamp", Date.now().toString());
-};
-
+  const resetLanguage = (i18n, defaultLanguage = DEFAULT_LANGUAGE) => {
+    i18n.changeLanguage(defaultLanguage);
+    localStorage.setItem("language", defaultLanguage);
+    localStorage.setItem("language_timestamp", Date.now().toString());
+  };
 
   useEffect(() => {
     const langFromUrl = new URLSearchParams(window.location.search).get("lang");
@@ -40,14 +41,15 @@ export const useLanguage = () => {
     localStorage.setItem("language", lang);
     localStorage.setItem("language_timestamp", currentTime.toString());
 
-    // Update URL
-    const currentSearchParams = new URLSearchParams(window.location.search);
-    currentSearchParams.set("lang", lang);
-    window.history.replaceState(
-      null,
-      "",
-      `${window.location.pathname}?${currentSearchParams.toString()}`
-    );
+    // Update URL preserving hash but don't add default language to URL
+    const currentParams = getCurrentParams();
+    const DEFAULT_LANGUAGE = "en";
+
+    // Only update URL if language is non-default or other params exist
+    if (lang !== DEFAULT_LANGUAGE || Object.keys(currentParams).length > 0) {
+      const newUrl = updateParam("lang", lang);
+      window.history.replaceState(null, "", newUrl);
+    }
   };
 
   return { changeLanguage };

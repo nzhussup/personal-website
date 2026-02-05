@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { buildUrl, getCurrentParams } from "../utils/urlUtil";
 
 const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
   const navigate = useNavigate();
@@ -28,15 +29,12 @@ const Navbar = ({ isDarkMode, toggleDarkMode, changeLanguage, t }) => {
   };
 
   const handlePageChange = (path) => {
-    const currentLang = i18n.language;
-    const defaultLang = "en";
-    const urlWithLang =
-      currentLang && currentLang !== defaultLang
-        ? `${path}?lang=${currentLang}`
-        : path;
+    // Get all current query parameters and preserve them
+    const currentParams = getCurrentParams();
+    const urlWithParams = buildUrl(path, currentParams);
 
     setTimeout(() => {
-      navigate(urlWithLang, { replace: true });
+      navigate(urlWithParams, { replace: true });
     }, 130);
   };
 
